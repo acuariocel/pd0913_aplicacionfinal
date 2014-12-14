@@ -286,7 +286,7 @@ public final class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        if (txtCedula.getText().equals("admin")) {
+        if (txtClave.getText().equals("admin")) {
             new ClaveUsuario(this, rootPaneCheckingEnabled).setVisible(true);
         } else {
             if (txtCedula.getText().length() == 10 && !txtClave.getText().isEmpty() && btnEntrar.isEnabled()) {
