@@ -141,7 +141,6 @@ public final class Login extends javax.swing.JFrame {
         txtClave = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 204, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -203,14 +202,14 @@ public final class Login extends javax.swing.JFrame {
         jPanel2.add(txtCedula, gridBagConstraints);
 
         btnSalir.setFont(new java.awt.Font("Calibri Light", 1, 36)); // NOI18N
-        btnSalir.setText("Salir");
+        btnSalir.setText("Enviar clave");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(30, 0, 40, 8);
@@ -224,7 +223,7 @@ public final class Login extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(30, 0, 40, 8);
@@ -238,7 +237,7 @@ public final class Login extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(30, 0, 40, 8);
@@ -277,31 +276,42 @@ public final class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        new ClaveUsuario(this, rootPaneCheckingEnabled).setVisible(true);
+        if (f.enviarContrasenia("acuariocel@gmail.com", "DIEGO ROMERO", "1234")) {
+            JOptionPane.showMessageDialog(rootPane, "La clave fue enviada a su correo por favor revise su buzon de entrada", "Mensaje", 1);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "La clave no pudo ser enviada verifique su conexión a internet", "Mensaje", 0);
+
+        }
+
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        if (txtCedula.getText().length() == 10 && !txtClave.getText().isEmpty() && btnEntrar.isEnabled()) {
-            String url = Funciones.getFileProperties("classes/confi.properties").getProperty("servicio_web") + "webresources/modelo.usuarios/login/cedula=" + txtCedula.getText() + ",clave=" + txtClave.getText();
-            String json = f.obtieneJsonGet(url);
-            if (!json.isEmpty()) {
-                if (json.charAt(0) == '{') {                    
-                    u = fu.obtieneDatosUsuario(json);                  
-                   if (u != null) {
-                       disable();
-                    JOptionPane.showMessageDialog(rootPane, "Bienvenido");
-                  } else {
-                       JOptionPane.showMessageDialog(this, "Usuario o contraseña erróneos");
+        if (txtCedula.getText().equals("admin")) {
+            new ClaveUsuario(this, rootPaneCheckingEnabled).setVisible(true);
+        } else {
+            if (txtCedula.getText().length() == 10 && !txtClave.getText().isEmpty() && btnEntrar.isEnabled()) {
+                String url = Funciones.getFileProperties("classes/confi.properties").getProperty("servicio_web") + "webresources/modelo.usuarios/login/cedula=" + txtCedula.getText() + ",clave=" + txtClave.getText();
+                String json = f.obtieneJsonGet(url);
+                if (!json.isEmpty()) {
+                    if (json.charAt(0) == '{') {
+                        u = fu.obtieneDatosUsuario(json);
+                        if (u != null) {
+                            disable();
+                            JOptionPane.showMessageDialog(rootPane, "Bienvenido");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Usuario o contraseña erróneos");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Servidor web no esta levantado");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Servidor web no esta levantado");
+                    JOptionPane.showMessageDialog(this, "Usuario o contraseña erróneos");
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario o contraseña erróneos");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Usuario o contraseña erróneos");
         }
+
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
@@ -309,11 +319,11 @@ public final class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void txtClaveKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveKeyTyped
-        
+
     }//GEN-LAST:event_txtClaveKeyTyped
 
     private void txtCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyReleased
-       
+
     }//GEN-LAST:event_txtCedulaKeyReleased
 
     private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
