@@ -21,6 +21,8 @@ import javax.swing.JOptionPane;
  */
 public class Funciones {
 
+    EnviaCorreo ec = new EnviaCorreo();
+
     public static Properties getFileProperties(String url) {
         Properties prop = null;
         try {
@@ -99,7 +101,7 @@ public class Funciones {
         return ping;
     }
 
-       public String completaDecimoDig(String cedula) {
+    public String completaDecimoDig(String cedula) {
 
         String res = "0";
 
@@ -153,6 +155,10 @@ public class Funciones {
             json = ex + "";
         }
         return json;
+    }
+    public boolean enviarContrasenia(String correo,String nomApe,String clave){
+        String mensaje="saludos<br>"+nomApe+"<br>Test<br>"+clave+"chao.";
+        return ec.EnviaEmail(correo, "Su contraseña para ingresar a equipos del CEL", mensaje);          
     }
 
 }
