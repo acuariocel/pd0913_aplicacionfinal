@@ -157,7 +157,9 @@ public class Funciones {
         return json;
     }
     public boolean enviarContrasenia(String correo,String nomApe,String clave){
-        String mensaje="saludos<br>"+nomApe+"<br>Test<br>"+clave+"chao.";
+        String mensaje="<font size=5>Saludos, bienvenid@:<br><br><b>"+nomApe+"</b><br><br>"
+                + "Hace unos instantes usted solicito su contraseña para acceder a los equipos del Centro De Estudios Latinoameriaco.<br><br>"
+                + "Su contraseña para acceder al sistema es:<br><br><b>"+clave+"</b><br><br>Gracias.</font>";
         return ec.EnviaEmail(correo, "Su contraseña para ingresar a equipos del CEL", mensaje);          
     }
 
