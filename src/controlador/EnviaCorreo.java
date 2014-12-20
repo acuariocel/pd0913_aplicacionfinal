@@ -22,16 +22,10 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 /**
- *
- * @author CEL
+ * @web http://www.diegoacuario.blogspot.com
+ * @author diegoacuario
  */
 public class EnviaCorreo {
-
-    public static void main(String[] args) {
-        Funciones ec = new Funciones();
-        System.out.println(ec.enviarContrasenia("sgeovanny222@gmail.com", "ARMIJOS ARMIJOS STALIN GEOVANNY", "1234"));
-
-    }
 
     String miCorreo = "controleqpcel";
     String miContraseña = "loja1234";

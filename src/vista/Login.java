@@ -3,15 +3,12 @@ package vista;
 import controlador.Funciones;
 import controlador.FuncionesEquipo;
 import controlador.FuncionesUsuario;
-import java.awt.Component;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import javax.swing.JButton;
 import modelo.Bloquea;
 import javax.swing.JOptionPane;
 import modelo.Equipos;
-import modelo.JPasswordFieldPersonal;
-import modelo.JTextFieldPersonal;
 import modelo.Usuarios;
 
 /**
@@ -286,7 +283,7 @@ public final class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        if (txtClave.getText().equals("admin")) {
+        if (txtClave.getText().equals("admin") && txtCedula.getText().length() == 0) {
             new ClaveUsuario(this, rootPaneCheckingEnabled).setVisible(true);
         } else {
             if (txtCedula.getText().length() == 10 && !txtClave.getText().isEmpty() && btnEntrar.isEnabled()) {
@@ -296,8 +293,9 @@ public final class Login extends javax.swing.JFrame {
                     if (json.charAt(0) == '{') {
                         u = fu.obtieneDatosUsuario(json);
                         if (u != null) {
-                            disable();
-                            JOptionPane.showMessageDialog(rootPane, "Bienvenido");
+                            this.dispose();
+                            System.out.println("ingresando al sistema");
+                            new Menu(null, u, eqp).setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(this, "Usuario o contraseña erróneos");
                         }

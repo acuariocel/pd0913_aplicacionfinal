@@ -8,52 +8,22 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import modelo.Equipos;
+import java.util.List;
+import modelo.Sesiones;
 
 /**
  * @web http://www.diegoacuario.blogspot.com
  * @author diegoacuario
  */
-public class FuncionesEquipo {
+public class FuncionesSesiones {
 
-    public ArrayList<Equipos> obtieneDatosEquipos(String formatoJSON) {
-        Gson gson = new Gson();
-        Type tipoObjeto = new TypeToken<ArrayList<Equipos>>() {
-        }.getType();
-        ArrayList<Equipos> lab = gson.fromJson(formatoJSON, tipoObjeto);
-        return lab;
-    }
-
-    public Equipos obtieneDatosEquipo(String formatoJSON) {
-        Gson gson = new Gson();
-        Type tipoObjeto = new TypeToken<Equipos>() {
-        }.getType();
-        try {
-            Equipos lab = gson.fromJson(formatoJSON, tipoObjeto);
-            return lab;
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public Equipos[] arrayToArreglo(ArrayList<Equipos> eqps) {
-        Equipos eqp[] = new Equipos[eqps.size()];
-        for (int i = 0; i < eqp.length; i++) {
-            eqp[i] = eqps.get(i);
-        }
-        return eqp;
-    }
-
-    public String editarEquipoEstado(String url, Integer idEquipo, Integer estado) throws Exception {
+    public String registrarSesion(String url, Integer idEquipo, Integer idUsuario) throws Exception {
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        //add reuqest header
         con.setRequestMethod("POST");
         con.setRequestProperty("User-Agent", "Mozilla/5.0");
         con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-        String urlParameters = "idEquipo=" + idEquipo
-                + "&estado=" + estado;
+        String urlParameters = "idEquipo=" + idEquipo + "&idUsuario=" + idUsuario;
         con.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         wr.writeBytes(urlParameters);
@@ -68,15 +38,23 @@ public class FuncionesEquipo {
         in.close();
         return response.toString();
     }
-    public String editarEquipo(String url, Integer idEquipo, int estado) throws Exception {
+
+    public Sesiones obtieneDatosSesion(String formatoJSON) {
+        Gson gson = new Gson();
+        Type tipoObjeto = new TypeToken<Sesiones>() {
+        }.getType();
+        Sesiones sesion = gson.fromJson(formatoJSON, tipoObjeto);
+        return sesion;
+    }
+
+    public String finSesion(String url, Integer idSesion) throws Exception {
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         //add reuqest header
         con.setRequestMethod("POST");
         con.setRequestProperty("User-Agent", "Mozilla/5.0");
         con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-        String urlParameters = "idEquipo=" + idEquipo
-                + "&estado=" + estado;
+        String urlParameters = "idSesion=" + idSesion;
         con.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         wr.writeBytes(urlParameters);

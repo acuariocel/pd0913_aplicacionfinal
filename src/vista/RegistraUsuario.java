@@ -37,7 +37,7 @@ public class RegistraUsuario extends javax.swing.JDialog {
         this.m = m;
         initComponents();
         if (m == null && u != null) {
-            jCheckBox1.setVisible(false);
+
             txtCedula.setText(u.getCedula());
             txtCedula.setEditable(false);
             txtNombres.setText(u.getNombres());
@@ -49,9 +49,7 @@ public class RegistraUsuario extends javax.swing.JDialog {
             txtCorreo.setText(u.getCorreo());
             btnGuardar.setText("Actualizar");
         }
-        if (m == null && u == null) {
-            jCheckBox1.setVisible(false);
-        }
+
         f = new Funciones();
         fUser = new FuncionesUsuario();
         this.setUndecorated(true);//quita bordes a jframe
@@ -90,7 +88,6 @@ public class RegistraUsuario extends javax.swing.JDialog {
         txtCelular = new javax.swing.JTextField();
         txtClave = new javax.swing.JPasswordField();
         btnGuardar = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -277,14 +274,6 @@ public class RegistraUsuario extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         jPanel1.add(btnGuardar, gridBagConstraints);
 
-        jCheckBox1.setFont(new java.awt.Font("Calibri Light", 1, 36)); // NOI18N
-        jCheckBox1.setText("Administrador");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        jPanel1.add(jCheckBox1, gridBagConstraints);
-
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         setSize(new java.awt.Dimension(737, 465));
@@ -294,7 +283,7 @@ public class RegistraUsuario extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
         if (m == false) {
-           
+
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -343,9 +332,7 @@ public class RegistraUsuario extends javax.swing.JDialog {
                             if (txtClave.getText().length() > 0) {
                                 String reg, men = "guardados", men1 = "guardar";
                                 int x = 0;
-                                if (jCheckBox1.isSelected()) {
-                                    x = 1;
-                                }
+
                                 try {
                                     if (btnGuardar.getText().equals("Actualizar")) {
                                         reg = fUser.editarUsuario(Funciones.getFileProperties("classes/confi.properties").getProperty("servicio_web") + "webresources/modelo.usuarios/editar/",
@@ -367,8 +354,8 @@ public class RegistraUsuario extends javax.swing.JDialog {
                                             txtCelular.setText("");
                                             txtCorreo.setText("");
                                             dispose();
-                                            if (m ==false) {
-                                               
+                                            if (m == false) {
+
                                             }
                                         } else {
                                             ((Component) evt.getSource()).transferFocus();
@@ -390,7 +377,7 @@ public class RegistraUsuario extends javax.swing.JDialog {
                                         txtCelular.setText("");
                                         txtCorreo.setText("");
                                         if (m == false) {
-                                            
+
                                         }
                                     } else {
                                         ((Component) evt.getSource()).transferFocus();
@@ -437,7 +424,7 @@ public class RegistraUsuario extends javax.swing.JDialog {
                 boolean x = false;
                 String url = Funciones.getFileProperties("classes/confi.properties").getProperty("servicio_web") + "webresources/modelo.usuarios/cedula=" + ced;
                 user = fUser.obtieneDatosUsuario(f.obtieneJsonGet(url));
-                if (user != null && m ==false) {
+                if (user != null && m == false) {
                     if (user.getIdRolUsuario().getIdRolUsuario() == 1) {
                         x = true;
                     }
@@ -448,7 +435,7 @@ public class RegistraUsuario extends javax.swing.JDialog {
                     }
                     btnEli.setVisible(true);
                     btnEli.setVisible(true);
-                    jCheckBox1.setSelected(x);
+
                     txtNombres.setText(user.getNombres());
                     txtApellidos.setText(user.getApellidos());
                     txtClave.setText(user.getClave());
@@ -459,7 +446,6 @@ public class RegistraUsuario extends javax.swing.JDialog {
                     btnEli.setVisible(false);
                 }
             } else {
-                jCheckBox1.setSelected(false);
                 btnGuardar.setText("Guardar");
                 btnEli.setVisible(false);
                 txtNombres.setText("");
@@ -515,8 +501,8 @@ public class RegistraUsuario extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(rootPane, "Usuario " + valor + "ado correctamente");
                     if (y == x) {
                         dispose();
-                        if (m ==false) {
-                            new Login(0).setVisible(true);                           
+                        if (m == false) {
+                            new Login(0).setVisible(true);
                         }
                     }
                     btnEli.setVisible(false);
@@ -543,7 +529,7 @@ public class RegistraUsuario extends javax.swing.JDialog {
                 boolean x = false;
                 String url = Funciones.getFileProperties("classes/confi.properties").getProperty("servicio_web") + "webresources/modelo.usuarios/cedula=" + ced;
                 user = fUser.obtieneDatosUsuario(f.obtieneJsonGet(url));
-                if (user != null && m ==false) {
+                if (user != null && m == false) {
                     if (user.getIdRolUsuario().getIdRolUsuario() == 1) {
                         x = true;
                     }
@@ -553,7 +539,6 @@ public class RegistraUsuario extends javax.swing.JDialog {
                         btnEli.setText("Desbloquear");
                     }
                     btnEli.setVisible(true);
-                    jCheckBox1.setSelected(x);
                     txtNombres.setText(user.getNombres());
                     txtApellidos.setText(user.getApellidos());
                     txtClave.setText(user.getClave());
@@ -564,7 +549,6 @@ public class RegistraUsuario extends javax.swing.JDialog {
                     btnEli.setVisible(false);
                 }
             } else {
-                jCheckBox1.setSelected(false);
                 btnGuardar.setText("Guardar");
                 btnEli.setVisible(false);
                 txtNombres.setText("");
@@ -606,7 +590,6 @@ public class RegistraUsuario extends javax.swing.JDialog {
     private javax.swing.JButton btnEli;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
